@@ -1,85 +1,26 @@
 {% extends "base.html" %}
 {% block content %}
-    <h2>About Page</h2>
+
+    <h2> {{ page_title }} </h2>
     <p>
         On April 26, 2941, Gandalf and the Dwarves arrived at Bag End. After a big tea and supper with Bilbo, they explained themselves and their intentions. 
         Bilbo was at first reluctant to join the group but Gandalf rushed him out of the door
     </p>
-    <div class="row featurette">
-        <div class="col-md-7">
-            <h3>Thorin Oakenshield</h3>
-            <p>
-                Thorin II "Oakenshield", eventually called King under the Mountain or Mountain King[1], was the son of Thráin II, the older brother of Frerin
-                 and Dís, the grandson of King Thrór and the uncle of Fíli and Kíli. Thorin was best known for his deeds as leader of a company that 
-                 infiltrated the lost Kingdom under the Mountain to take it back from Smaug and for leading an alliance of Men, Dwarves, and Elves in the 
-                 Battle of Five Armies.
-            </p>
-        </div>
-        <div class="col-md-5">
-            <img src="https://static.wikia.nocookie.net/lotr/images/7/76/ThorinTDOMTextlessPoster.jpg" alt="">
-        </div>
-    </div>
 
-    <div class="row featurette">
-        <div class="col-md-5">
-            <img src="https://static.wikia.nocookie.net/lotr/images/b/b4/The-Hobbit-Fili-and-Kili.jpg" alt="">
-        </div>
-        <div class="col-md-7">
-            <h3>Fili and Kili</h3>
-            <p>
-                Fíli and Kíli were brothers, the youngest of the thirteen Dwarves who set out with Thorin Oakenshield's company, along with Gandalf and 
-                Bilbo Baggins, to reclaim the Lonely Mountain from the dragon Smaug.
+    {% for member in company %}
 
-                Fíli and Kíli were the two most active Dwarves of Thorin's company, and apart from Balin, and possibly Bombur, they appeared more 
-                frequently as "individual" characters in Tolkien's novel than the rest of Thorin's companions, who were most often named only in "group" 
-                references to the entire company.
-            </p>
+        <div class="row featurette">
+            <div class="col-md-7">
+                <h3>{{ member.name }}</h3>
+                <p>{{ member.description }}</p>
+            </div>
+            <div class="col-md-5">
+                <img src="{{ member.image_source }}" alt="" class="featurette-image image-responsive">
+            </div>
         </div>
-    </div>
 
-    <div class="row featurette">
-        <div class="col-md-7">
-            <h3>Oin</h3>
-            <p>
-                Óin was a dwarf of Durin's Folk known for being a part of Thorin's Company in the Quest of Erebor.
-            </p>
-        </div>
-        <div class="col-md-5">
-            <img src="https://static.wikia.nocookie.net/lotr/images/e/e8/Oin.jpg" alt="">
-        </div>
-    </div>
+        <hr class="featurette-divider">
 
-    <div class="row featurette">
-        <div class="col-md-5">
-            <img src="data:image/jpeg;base64,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" alt="">
-        </div>
-        <div class="col-md-7">
-            <h3>Gloin</h3>
-            <p>
-                Glóin son of Gróin was one of the Dwarves of Thorin II Oakenshield's company who set out to reclaim the Lonely Mountain in the Quest of Erebor. 
-                He was also the father of Gimli, who became a member of the Fellowship of the Ring.
+    {% endfor %}
 
-                Glóin chiefly appears in The Hobbit as a supporting character. Glóin also appears in The Fellowship of the Ring during the Council of Elrond.
-            </p>
-        </div>
-    </div>
-
-    <div class="row featurette">
-        <div class="col-md-7">
-            <h3>Baln</h3>
-            <p>
-                Balin was a Dwarf leader, the son of Fundin, and elder brother of Dwalin. He was one of the thirteen Dwarves who accompanied Thorin II 
-                Oakenshield on the quest to regain the Lonely Mountain.
-                A Dwarf Lord known for his wise counsel and willingness to listen, he was one of Thorin's closest friends and advisers. Balin was distantly 
-                related to him, and a descendant of the noble House of Durin.
-
-                He later went to re-establish the Dwarf presence in Moria, but within five years it was overcome once more by Orcs, and he was killed there 
-                along with the rest of his companions.
-            </p>
-        </div>
-        <div class="col-md-5">
-            <img src="https://static.wikia.nocookie.net/lotr/images/5/52/Balin.jpg" alt="">
-        </div>
-    </div>
-    
 {% endblock %}
